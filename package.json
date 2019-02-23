@@ -1,0 +1,19 @@
+{
+  "name": "workout-utils",
+  "version": "0.0.1",
+  "description": "Utilities for the workout project",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/durangatan/workout-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/durangatan/workout-utils/issues"
+  },
+  "homepage": "https://github.com/durangatan/workout-utils#readme"
+}

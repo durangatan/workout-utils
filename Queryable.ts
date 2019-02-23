@@ -38,35 +38,4 @@ export default class Queryable {
   get upsertKeys() {
     return this.ownKeys.filter(key => key !== 'id');
   }
-
-  get ownKeysQueryString() {
-    return `(${this.ownKeys.join()})`;
-  }
-
-  get upsertQueryString() {
-    return `${this.upsertKeys
-      .map(
-        key =>
-          `${key} = ${typeof this[key] === 'number' ? '' : '"'}${this[key]}${typeof this[key] === 'number' ? '' : '"'}`
-      )
-      .join()}`;
-  }
-
-  get ownValuesQueryString() {
-    return `(${this.ownKeys
-      .map(key => `${typeof this[key] === 'number' ? '' : '"'}${this[key]}${typeof this[key] === 'number' ? '' : '"'}`)
-      .join()})`;
-  }
-
-  insertInto(tableName) {
-    const queryString = `INSERT INTO ${tableName} ${this.ownKeysQueryString} VALUES ${this.ownValuesQueryString};`;
-    return queryString;
-  }
-
-  upsertInto(tableName) {
-    const queryString = `INSERT INTO ${tableName} ${this.ownKeysQueryString} VALUES ${
-      this.ownValuesQueryString
-    } ON DUPLICATE KEY UPDATE ${this.upsertQueryString}`;
-    return queryString;
-  }
 }

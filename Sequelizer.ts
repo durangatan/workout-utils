@@ -4,8 +4,8 @@ export default class Sequelizer {
     this.tableName = tableName;
   }
 
-  where(a: string, comparator: string, b: string) {
-    return `WHERE ${a} ${comparator} ${b}`;
+  where(a: string, comparator: string) {
+    return `WHERE ${a} ${comparator}`;
   }
 
   orderBy(orderBy: string, limit: string, direction: string = 'DESC') {
@@ -13,34 +13,32 @@ export default class Sequelizer {
   }
 
   select(subQueries?: Array<string>) {
-    return `SELECT * FROM ${this.tableName} ${
-      subQueries ? subQueries.join(' ') : null
-    };`;
+    return `SELECT * FROM ${this.tableName} ${subQueries ? subQueries.join(' ') : ''}`;
   }
 
   get selectById() {
-    const subQueries = [this.where('id', '=', '?')];
+    const subQueries = [this.where('id', '=')];
     return this.select(subQueries);
   }
 
   get selectMultiById() {
-    const subQueries = [this.where('id', 'in', '?')];
+    const subQueries = [this.where('id', 'in')];
     return this.select(subQueries);
   }
 
   get deleteById() {
-    return `DELETE FROM ${this.tableName} WHERE id = ?`;
+    return `DELETE FROM ${this.tableName} WHERE id = `;
   }
 
   get deleteMultiById() {
-    return `DELETE FROM ${this.tableName} WHERE id IN ?`;
+    return `DELETE FROM ${this.tableName} WHERE id IN `;
   }
 
   insert(recordKeys: Array<string>) {
-    return `INSERT INTO ${this.tableName} (${recordKeys.join()}) VALUES ?`;
+    return `INSERT INTO ${this.tableName} (${recordKeys.join()}) VALUES `;
   }
 
   insertMulti(recordKeys: Array<string>) {
-    return `INSERT INTO ${this.tableName} (${recordKeys.join()}) VALUES ?`;
+    return `INSERT INTO ${this.tableName} (${recordKeys.join()}) VALUES `;
   }
 }
